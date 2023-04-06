@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:todolist_bloc/screens/tabs_screen.dart';
 import 'package:todolist_bloc/services/app_theme.dart';
 import './blocs/bloc_exports.dart';
-import 'package:todolist_bloc/screens/tasks_screen.dart';
+import 'package:todolist_bloc/screens/pending_screen.dart';
 import './services/app_route.dart';
 
 void main() async {
@@ -33,7 +34,7 @@ class MyTodoListApp extends StatelessWidget {
       child: BlocBuilder<SwitchBlocBloc, SwitchBlocState>(
         builder: (context, state) {
           return MaterialApp(
-            home: TaskScreen(),
+            home: TabsScreen(),
             theme: state.switchValue
                 ? AppThemes.appThemeData[AppTheme.darkTheme]
                 : AppThemes.appThemeData[AppTheme.lightTheme],

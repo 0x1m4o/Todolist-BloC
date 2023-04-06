@@ -4,29 +4,46 @@ part of 'task_bloc_bloc.dart';
 
 /// Kita buat sebuah bloc State untuk Tasknya
 class TaskBlocState extends Equatable {
-  final List<Task> allTask;
+  final List<Task> pendingTasks;
+  final List<Task> completedTasks;
+  final List<Task> favoriteTasks;
   final List<Task> removedTask;
   const TaskBlocState({
-    this.allTask = const <Task>[],
+    this.pendingTasks = const <Task>[],
+    this.completedTasks = const <Task>[],
+    this.favoriteTasks = const <Task>[],
     this.removedTask = const <Task>[],
   });
 
   @override
-  List<Object> get props => [allTask, removedTask];
+  List<Object> get props =>
+      [pendingTasks, completedTasks, favoriteTasks, removedTask];
   @override
   bool get stringify => true;
 
   Map<String, dynamic> toMap() {
     return {
-      'allTask': allTask.map((x) => x.toMap()).toList(),
+      'allTask': pendingTasks.map((x) => x.toMap()).toList(),
+      'completedTasks': completedTasks.map((x) => x.toMap()).toList(),
+      'favoriteTasks': favoriteTasks.map((x) => x.toMap()).toList(),
       'removedTask': removedTask.map((x) => x.toMap()).toList(),
     };
   }
 
   factory TaskBlocState.fromMap(Map<String, dynamic> map) {
     return TaskBlocState(
-      allTask: List<Task>.from(
-        (map['allTask']?.map(
+      pendingTasks: List<Task>.from(
+        (map['pendingTasks']?.map(
+          (x) => Task.fromMap(x),
+        )),
+      ),
+      completedTasks: List<Task>.from(
+        (map['completedTasks']?.map(
+          (x) => Task.fromMap(x),
+        )),
+      ),
+      favoriteTasks: List<Task>.from(
+        (map['favoriteTasks']?.map(
           (x) => Task.fromMap(x),
         )),
       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_bloc/screens/tabs_screen.dart';
 import '../blocs/bloc_exports.dart';
 import 'package:todolist_bloc/screens/recycle_bin.dart';
-import 'package:todolist_bloc/screens/tasks_screen.dart';
+import 'package:todolist_bloc/screens/pending_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   final bool switchValue = false;
@@ -50,10 +51,10 @@ class MyDrawer extends StatelessWidget {
                     bottom: BorderSide(width: 0.2),
                   ),
                   onTap: () => Navigator.of(context)
-                      .pushReplacementNamed(TaskScreen.nameRoute),
+                      .pushReplacementNamed(TabsScreen.nameRoute),
                   leading: Icon(Icons.folder),
                   title: Text('My Tasks'),
-                  trailing: Text('${state.allTask.length}'),
+                  trailing: Text('${state.pendingTasks.length}'),
                 );
               },
             ),

@@ -34,8 +34,8 @@ class TaskTile extends StatelessWidget {
       ),
       title: Text(task.title,
           style: TextStyle(
-              decoration: task.isDone! ? TextDecoration.lineThrough : null,
-              fontSize: 18)),
+              fontSize: 18,
+              color: task.isDone! ? Colors.white.withOpacity(0.8) : null)),
       trailing: IconButton(
         icon: Icon(Icons.delete),
         onPressed: () {
