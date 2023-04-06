@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist_bloc/blocs/bloc/task_bloc_bloc.dart';
+import '../blocs/bloc_exports.dart';
 import 'package:todolist_bloc/models/task.dart';
 import 'package:todolist_bloc/shared/show_snackbar.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todolist_bloc/blocs/bloc/task_bloc_bloc.dart';
+import '../blocs/bloc_exports.dart';
 import 'package:todolist_bloc/models/task.dart';
 import '../shared/text_fields_decoration.dart';
 import '../shared/add_task_validated.dart';

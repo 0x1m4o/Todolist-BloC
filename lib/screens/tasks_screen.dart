@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todolist_bloc/blocs/bloc/task_bloc_bloc.dart';
+import '../blocs/bloc_exports.dart';
 import 'package:todolist_bloc/models/task.dart';
 import 'package:todolist_bloc/widgets/task_list.dart';
 import './add_dialog_screen.dart';

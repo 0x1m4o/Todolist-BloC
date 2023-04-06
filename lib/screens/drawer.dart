@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:todolist_bloc/blocs/bloc/task_bloc_bloc.dart';
-import 'package:todolist_bloc/blocs/bloc_exports.dart';
+import '../blocs/bloc_exports.dart';
 import 'package:todolist_bloc/screens/recycle_bin.dart';
 import 'package:todolist_bloc/screens/tasks_screen.dart';
 
 class MyDrawer extends StatelessWidget {
+  final bool switchValue = false;
+
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final switchEvent = context.read<SwitchBlocBloc>();
     return SafeArea(
       child: Drawer(
         child: Column(
@@ -18,11 +20,28 @@ class MyDrawer extends StatelessWidget {
                   EdgeInsetsDirectional.symmetric(vertical: 20, horizontal: 15),
               width: double.infinity,
               color: Color.fromARGB(255, 25, 55, 109),
-              child: Text('Rizzler Task',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(color: Colors.white)),
+              child: Row(
+                children: [
+                  Text('Rizzler Task',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(color: Colors.white)),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  BlocBuilder<SwitchBlocBloc, SwitchBlocState>(
+                    builder: (context, state) {
+                      return Switch(
+                        value: state.switchValue,
+                        onChanged: (value) => value
+                            ? switchEvent.add(SwitchOn())
+                            : switchEvent.add(SwitchOff()),
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
             BlocBuilder<TaskBlocBloc, TaskBlocState>(
               builder: (context, state) {
@@ -30,8 +49,8 @@ class MyDrawer extends StatelessWidget {
                   shape: Border(
                     bottom: BorderSide(width: 0.2),
                   ),
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(TaskScreen.nameRoute),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(TaskScreen.nameRoute),
                   leading: Icon(Icons.folder),
                   title: Text('My Tasks'),
                   trailing: Text('${state.allTask.length}'),
@@ -45,7 +64,7 @@ class MyDrawer extends StatelessWidget {
                     bottom: BorderSide(width: 0.2),
                   ),
                   onTap: () => Navigator.of(context)
-                      .pushNamed(RecycleBinScreen.nameRoute),
+                      .pushReplacementNamed(RecycleBinScreen.nameRoute),
                   leading: Icon(Icons.delete),
                   title: Text('Trash'),
                   trailing: Text('${state.removedTask.length}'),
